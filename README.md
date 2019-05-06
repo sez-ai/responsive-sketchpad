@@ -9,7 +9,7 @@ A completely responsive, HTML5 canvas sketchpad for use on desktop and mobile br
 
 ### Installation
 
-`npm install responsive-sketchpad`
+`npm i @sez-ai/responsive-sketchpad`
 
 ### Example
 
