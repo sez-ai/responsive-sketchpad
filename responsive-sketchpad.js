@@ -217,6 +217,7 @@
             e.preventDefault();
 
             strokes = that.strokes;
+            rawStrokes = that.rawStrokes;
             sketching = true;
             that.undos = [];
 
@@ -307,6 +308,7 @@
         // Public variables
         this.canvas = canvas;
         this.strokes = strokes;
+        this.rawStrokes = rawStrokes;
         this.undos = undos;
         this.opts = opts;
 
@@ -330,6 +332,7 @@
         }
 
         this.undos.push(this.strokes.pop());
+        this.rawStrokes.pop()
         this.redraw();
     };
 
@@ -351,6 +354,7 @@
     Sketchpad.prototype.clear = function () {
         this.undos = [];  // TODO: Add clear action to undo
         this.strokes = [];
+        this.rawStrokes = [];
         this.redraw();
     };
 
