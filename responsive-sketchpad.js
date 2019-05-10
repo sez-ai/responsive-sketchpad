@@ -26,6 +26,7 @@
 
         opts = opts || {};
         var strokes = [];
+        var rawStrokes = [];
         var undos = [];
 
         if (opts.data) {
@@ -85,6 +86,16 @@
         }
 
         /**
+         * Returns a points x,y locations relative to the size of the canvase
+         */
+        function getRawPoint(point) {
+            return {
+                x: point.x,
+                y: point.y
+            };
+        }
+
+        /**
          * Returns true if is a touch event, false otherwise
          */
         function isTouchEvent (e) {
@@ -107,6 +118,24 @@
             }
 
             return getPointRelativeToCanvas(cur);
+        }
+
+        /**
+         * Get location of the cursor in the canvas
+         */
+        function getCursorRaw(e) {
+            var cur = {};
+            var rect = that.canvas.getBoundingClientRect();
+
+            if (isTouchEvent(e)) {
+                cur.x = e.touches[0].clientX - rect.left;
+                cur.y = e.touches[0].clientY - rect.top;
+            } else {
+                cur.x = e.clientX - rect.left;
+                cur.y = e.clientY - rect.top;
+            }
+
+            return getRawPoint(cur);
         }
 
         /**
@@ -192,8 +221,17 @@
             that.undos = [];
 
             var cursor = getCursorRelativeToCanvas(e);
+            var cursorRaw = getCursorRaw(e);
             strokes.push({
                 points: [cursor],
+                color: opts.line.color,
+                size: getLineSizeRelativeToCanvas(opts.line.size),
+                cap: opts.line.cap,
+                join: opts.line.join,
+                miterLimit: opts.line.miterLimit
+            });
+            rawStrokes.push({
+                points: [cursorRaw],
                 color: opts.line.color,
                 size: getLineSizeRelativeToCanvas(opts.line.size),
                 cap: opts.line.cap,
@@ -210,9 +248,14 @@
             e.preventDefault();
 
             var cursor = getCursorRelativeToCanvas(e);
+            var cursorRaw = getCursorRaw(e);
             that.strokes[strokes.length - 1].points.push({
                 x: cursor.x,
                 y: cursor.y
+            });
+            that.rawStrokes[rawStrokes.length - 1].points.push({
+                x: cursorRaw.x,
+                y: cursorRaw.y
             });
 
             that.redraw();
@@ -232,9 +275,14 @@
             }
 
             var cursor = getCursorRelativeToCanvas(e);
+            var cursorRaw = getCursorRaw(e);
             that.strokes[strokes.length - 1].points.push({
                 x: cursor.x,
                 y: cursor.y
+            });
+            that.rawStrokes[rawStrokes.length - 1].points.push({
+                x: cursorRaw.x,
+                y: cursorRaw.y
             });
             that.redraw();
 			

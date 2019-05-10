@@ -46,10 +46,16 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <div class="container">
     <section class="text-center">
-      <h2>Responsive Sketchpad</h2>
+      <h2>Sez-AI Sketchpad</h2>
       <h5>A completely responsive, HTML5 canvas sketchpad for use on desktop and mobile browsers</h5>
     </section>
-
+      
+    <section>
+        <div id="sketchpad"></div>
+        <em>Try resizing the window!</em>
+        <button class="u-full-width" style="color:green" id="process">Process</button>
+    </section>
+<!--
     <section>
       <div class="row">
         <div class="two-thirds column">
@@ -73,7 +79,6 @@
         </div>
       </div>
     </section>
-
     <section>
       <h3>Basic Usage</h3>
 
@@ -107,6 +112,8 @@ pad.clear();
 pad.resize(newWidth);
 </code></pre>
     </section>
+
+-->
   </div>
 
   <!-- Scripts
@@ -114,42 +121,48 @@ pad.resize(newWidth);
   <script src="responsive-sketchpad.js"></script>
   <script>
     var el = document.getElementById('sketchpad');
-    var pad = new Sketchpad(el);
+    var pad = new Sketchpad(el, {aspectRatio: 0.25, line: {size: 2}});
 
-    // setLineColor
-    function setLineColor(e) {
-        var color = e.target.value;
-        if (!color.startsWith('#')) {
-            color = '#' + color;
-        }
-        pad.setLineColor(color);
-    }
-    document.getElementById('line-color-input').oninput = setLineColor;
+//     // setLineColor
+//     function setLineColor(e) {
+//         var color = e.target.value;
+//         if (!color.startsWith('#')) {
+//             color = '#' + color;
+//         }
+//         pad.setLineColor(color);
+//     }
+//     document.getElementById('line-color-input').oninput = setLineColor;
 
-    // setLineSize
-    function setLineSize(e) {
-        var size = e.target.value;
-        pad.setLineSize(size);
-    }
-    document.getElementById('line-size-input').oninput = setLineSize;
+//     // setLineSize
+//     function setLineSize(e) {
+//         var size = e.target.value;
+//         pad.setLineSize(size);
+//     }
+//     document.getElementById('line-size-input').oninput = setLineSize;
 
-    // undo
-    function undo() {
-        pad.undo();
-    }
-    document.getElementById('undo').onclick = undo;
+//     // undo
+//     function undo() {
+//         pad.undo();
+//     }
+//     document.getElementById('undo').onclick = undo;
 
-    // redo
-    function redo() {
-        pad.redo();
-    }
-    document.getElementById('redo').onclick = redo;
+//     // redo
+//     function redo() {
+//         pad.redo();
+//     }
+//     document.getElementById('redo').onclick = redo;
 
-    // clear
-    function clear() {
-        pad.clear();
+//     // clear
+//     function clear() {
+//         pad.clear();
+//     }
+//     document.getElementById('clear').onclick = clear;
+      
+    // process
+    function process() {
+        console.log(pad.toJSON());
     }
-    document.getElementById('clear').onclick = clear;
+    document.getElementById('process').onclick = process;
 
     // resize
     window.onresize = function (e) {
