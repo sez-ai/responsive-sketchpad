@@ -361,7 +361,8 @@
     Sketchpad.prototype.toJSON = function () {
         return {
             aspectRatio: this.canvas.width / this.canvas.height,
-            strokes: this.strokes
+            strokes: this.strokes,
+            rawStrokes: this.rawStrokes
         };
     };
 
