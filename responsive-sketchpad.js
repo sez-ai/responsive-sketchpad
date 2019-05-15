@@ -291,15 +291,18 @@
         }
 
         // Event Listeners
-        canvas.addEventListener('mousedown', startLine);
-        canvas.addEventListener('touchstart', startLine);
+        if (!opts.passive) {
+            canvas.addEventListener('mousedown', startLine);
+            canvas.addEventListener('touchstart', startLine);
 
-        canvas.addEventListener('mousemove', drawLine);
-        canvas.addEventListener('touchmove', drawLine);
+            canvas.addEventListener('mousemove', drawLine);
+            canvas.addEventListener('touchmove', drawLine);
 
-        canvas.addEventListener('mouseup', endLine);
-        canvas.addEventListener('mouseleave', endLine);
-        canvas.addEventListener('touchend', endLine);
+            canvas.addEventListener('mouseup', endLine);
+            canvas.addEventListener('mouseleave', endLine);
+            canvas.addEventListener('touchend', endLine);
+        }
+        
 		
         if (typeof opts.onDrawEnd === 'function') {
             this.onDrawEnd = opts.onDrawEnd;

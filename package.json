@@ -1,6 +1,6 @@
 {
   "name": "@sez-ai/responsive-sketchpad",
-  "version": "0.2.3",
+  "version": "0.2.5",
   "description": "A completely responsive sketchpad based on HTML5 canvas",
   "main": "responsive-sketchpad.js",
   "scripts": {
